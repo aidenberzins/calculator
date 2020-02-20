@@ -19,6 +19,7 @@ const inputDigit = digit => {
 };
 
 const inputDecimal = dot => {
+  if (calculator.waitingForSecondOperand === true) return;
   if (!calculator.displayValue.includes(dot)) {
     calculator.displayValue += dot;
   }
@@ -34,6 +35,13 @@ const handleOperator = nextOperator => {
   calculator.waitingForSecondOperand = true;
   calculator.operator = nextOperator;
   console.table(calculator);
+};
+
+const resetCalculator = () => {
+  calculator.displayValue = "0";
+  calculator.firstOperand = null;
+  calculator.waitingForSecondOperand = false;
+  calculator.operator = null;
 };
 
 function updateDisplay() {
@@ -63,7 +71,8 @@ keys.addEventListener("click", event => {
   }
 
   if (target.classList.contains("all-clear")) {
-    customLog(`clear, ${target.value}`, "error");
+    resetCalculator();
+    updateDisplay();
     return;
   }
 
