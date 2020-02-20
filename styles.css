@@ -1,0 +1,66 @@
+* {
+  box-sizing: border-box;
+  font-family: helvetica;
+}
+body {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(
+      135deg,
+      rgba(0, 100, 255, 0.5),
+      rgba(100, 130, 0, 0.5)
+    ),
+    url("https://thumbs.dreamstime.com/b/calculator-background-made-vector-illustration-39034340.jpg")
+      top/ cover no-repeat;
+}
+
+#calculator {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #353535;
+  padding: 10px 10px 20px;
+  width: 100%;
+  max-width: 350px;
+  min-height: 450px;
+  border-radius: 5px;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.screen {
+  font-family: "Orbitron", monospace;
+  text-align: right;
+  padding: 10px;
+  background-color: black;
+  text: white;
+  min-height: 50px;
+  margin-bottom: 25px;
+  font-size: 2.5em;
+  color: GREEN;
+}
+
+button {
+  font-size: 1.5em;
+  padding: 10px;
+  width: 70px;
+  height: 70px;
+  margin: 5px;
+}
+.equals {
+  border: 2px solid darkorange;
+  color: white;
+  background-color: orange;
+}
+.operations {
+  border: 2px solid darkgreen;
+  color: white;
+  background-color: green;
+}
