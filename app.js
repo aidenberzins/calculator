@@ -5,6 +5,37 @@ const calculator = {
   operator: null
 };
 
+const inputDigit = digit => {
+  const { displayValue, waitingForSecondOperand } = calculator;
+
+  if (waitingForSecondOperand) {
+    calculator.displayValue = digit;
+    calculator.waitingForSecondOperand = false;
+  } else {
+    calculator.displayValue =
+      displayValue === "0" ? digit : displayValue + digit;
+  }
+  console.table(calculator);
+};
+
+const inputDecimal = dot => {
+  if (!calculator.displayValue.includes(dot)) {
+    calculator.displayValue += dot;
+  }
+};
+
+const handleOperator = nextOperator => {
+  const { firstOperand, displayValue, operator } = calculator;
+  // const inputValue = parseFloat(displayValue);
+
+  if (firstOperand == null) {
+    calculator.firstOperand = parseFloat(displayValue);
+  }
+  calculator.waitingForSecondOperand = true;
+  calculator.operator = nextOperator;
+  console.table(calculator);
+};
+
 function updateDisplay() {
   const display = document.querySelector("#screen");
   display.value = calculator.displayValue;
@@ -20,44 +51,22 @@ keys.addEventListener("click", event => {
   }
 
   if (target.classList.contains("operator")) {
-<<<<<<< HEAD
-    console.log(
-      `%c operator ${target.value}`,
-      `background: #353535; color: #bada55; padding: 10px;`
-    );
-=======
-    console.log("operator", target.value);
->>>>>>> 61b2026e46ab3a696a10a44f72c8cf375c7f3a14
+    handleOperator(target.value);
+    updateDisplay();
     return;
   }
 
   if (target.classList.contains("decimal")) {
-<<<<<<< HEAD
-    console.log(`%c decimal${target.value}`, `color: #bada55; padding: 10px;`);
-=======
-    console.log("decimal", target.value);
->>>>>>> 61b2026e46ab3a696a10a44f72c8cf375c7f3a14
+    inputDecimal(target.value);
+    updateDisplay();
     return;
   }
 
   if (target.classList.contains("all-clear")) {
-<<<<<<< HEAD
-    console.log(
-      `%c clear, ${target.value}`,
-      `background: #222; color: yellow; padding: 10px;`
-    );
+    customLog(`clear, ${target.value}`, "error");
     return;
   }
 
-  console.log(
-    `%c digit, ${target.value}`,
-    `background: #222; color: #bada55; padding: 10px;`
-  );
-=======
-    console.log("clear", target.value);
-    return;
-  }
-
-  console.log("digit", target.value);
->>>>>>> 61b2026e46ab3a696a10a44f72c8cf375c7f3a14
+  inputDigit(target.value);
+  updateDisplay();
 });
